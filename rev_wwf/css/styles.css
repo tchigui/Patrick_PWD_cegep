@@ -1,0 +1,247 @@
+
+html {
+	font-size: 1em;
+}
+body {
+	background: rgb(220,220,220);
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+.container {
+	width: 56.25em;
+	margin: 0 auto;
+	background: #fff;
+	box-sizing: border-box;
+	min-height: 100vh;
+}
+header {
+	background: rgb(114,172,69);
+	height: 15.5em;
+	position: relative;
+	border-bottom: 0.2em solid #000;
+}
+.header-bar {
+	position: absolute;
+	top: 0.7em;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+}
+.logo-title {
+	display: inline-block;
+	background: rgb(114,172,69);
+	padding: 0.2em 1em 0.2em 0.5em;
+	border-radius: 0.1em;
+	box-shadow: 0.125em 0.125em 0.32em #000;
+}
+.logo-text {
+	color: #fff;
+	font-size: 1.9em;
+	font-weight: bold;
+	text-shadow: 0.125em 0.125em 0.32em #000;
+}
+.header-img {
+	width: 100%;
+	height: 10em;
+	overflow: hidden;
+	position: absolute;
+	top: 2.5em;
+	left: 0;
+	z-index: 1;
+}
+.bg-header {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.header-logo {
+	position: absolute;
+	top: 2.5em;
+	left: 1em;
+	z-index: 3;
+}
+.header-logo img {
+	width: 6em;
+	border: 0.2em solid #000;
+	background: #fff;
+}
+nav {
+	margin-top: 13.5em;
+	padding: 1em 0 1em 0.5em;
+	background: #fff;
+	border-bottom: 0.0625em solid rgb(213,213,213);
+}
+nav a {
+	font-size: 1em;
+	color: rgb(114,172,69);
+	text-decoration: none;
+	border: 0.0625em solid rgb(213,213,213);
+	padding: 0.4em 1.2em;
+	margin-right: 0.5em;
+	border-radius: 0.2em;
+	transition: background 0.2s, color 0.2s;
+}
+nav a:hover, nav a:focus {
+	background: rgb(114,172,69);
+	color: #fff;
+}
+main {
+	padding: 2em 2em 0 2em;
+}
+h1 {
+	font-size: 2.1em;
+	color: rgb(136,136,136);
+	font-weight: normal;
+	margin-bottom: 0.5em;
+	margin-top: 0;
+}
+.intro {
+	font-size: 1.5em;
+	color: rgb(114,172,69);
+	line-height: 1.7em;
+	margin-bottom: 0.5em;
+}
+.justified {
+	text-align: justify;
+	color: rgb(136,136,136);
+	font-size: 0.9em;
+	line-height: 1.7em;
+}
+ul.justified {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding-left: 2em;
+}
+.highlight {
+	font-size: 1em;
+	color: rgb(114,172,69);
+	font-weight: bold;
+	margin: 1em 0 1em 0;
+}
+.bold-green {
+	color: rgb(114,172,69);
+	font-weight: bold;
+}
+.bold-bold {
+	font-weight: bold;
+	color: rgb(136,136,136);
+}
+.content-row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.content-col {
+	flex: 2;
+	min-width: 0;
+}
+.image-col {
+	flex: 1;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	margin-left: 2em;
+}
+.person-img {
+	width: 14em;
+	border-radius: 0.5em;
+	border: 0.0625em solid rgb(213,213,213);
+}
+.savoir-plus {
+	display: flex;
+	align-items: center;
+	margin: 1.5em 0 1em 0;
+	color: rgb(136,136,136);
+	font-size: 1em;
+}
+.oeil {
+	width: 2em;
+	margin-right: 0.5em;
+}
+.comment-section {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.comment-section h2 {
+	font-size: 1.5em;
+	color: rgb(136,136,136);
+	margin-bottom: 0.5em;
+}
+form {
+	background: #fff;
+	border: 0.0625em solid rgb(213,213,213);
+	padding: 1em;
+	border-radius: 0.2em;
+}
+.form-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.7em;
+}
+label {
+	font-size: 1.1em;
+	color: rgb(114,172,69);
+	margin-right: 0.5em;
+}
+input[type="text"], input[type="email"] {
+	font-size: 0.9em;
+	padding: 0.3em 0.5em;
+	margin-right: 1em;
+	border: 0.0625em solid rgb(213,213,213);
+	border-radius: 0.2em;
+	color: rgb(136,136,136);
+	background: #fff;
+}
+textarea {
+	width: 100%;
+	height: 8em;
+	font-size: 0.9em;
+	color: rgb(136,136,136);
+	border: 0.0625em solid rgb(213,213,213);
+	border-radius: 0.2em;
+	margin-bottom: 1em;
+	padding: 0.5em;
+	resize: vertical;
+}
+button[type="submit"] {
+	font-size: 0.9em;
+	color: #fff;
+	background: rgb(136,136,136);
+	border: none;
+	border-radius: 0.2em;
+	padding: 0.5em 2em;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+button[type="submit"]:hover {
+	background: rgb(114,172,69);
+}
+footer {
+	margin-top: 2em;
+	background: #fff;
+	padding: 0 0 1em 0;
+}
+.cadeau-banner {
+	width: 100%;
+	margin: 1em 0;
+	text-align: center;
+}
+.cadeau-banner img {
+	width: 100%;
+	max-width: 100%;
+	border-radius: 0.5em;
+}
+.sources {
+	font-size: 0.7em;
+	color: #fff;
+	background: rgb(136,136,136);
+	padding: 0.5em 1em;
+	border-radius: 0.2em;
+	margin-top: 1em;
+}
+.sources a {
+	color: #fff;
+	text-decoration: underline;
+}
