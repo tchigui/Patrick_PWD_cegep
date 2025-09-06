@@ -201,41 +201,64 @@ form {
 	display: flex;
 	align-items: center;
 	margin-bottom: 0.7em;
+    
+    
 }
 label {
 	font-size: 1.1em;
 	color: rgb(114,172,69);
 	margin-right: 0.5em;
+        margin-left: -2em;
+
+        
+
 }
+label[for="courriel"] {
+    margin-left: 0.5em; /* décale le label à droite */
+}
+
 input[type="text"], input[type="email"] {
 	font-size: 0.9em;
 	padding: 0.3em 0.5em;
 	margin-right: 1em;
-	border: 0.0625em solid rgb(213,213,213);
+	border: 0.1em solid rgb(175, 174, 174);
 	border-radius: 0.2em;
 	color: rgb(136,136,136);
 	background: #fff;
+        margin-left: 0.09em;
+
+        
+
 }
 textarea {
 	width: 100%;
-	height: 8em;
+	height: 19em;
 	font-size: 0.9em;
 	color: rgb(136,136,136);
-	border: 0.0625em solid rgb(213,213,213);
+	border: 0.1em solid rgb(175, 174, 174);
 	border-radius: 0.2em;
 	margin-bottom: 1em;
 	padding: 0.5em;
 	resize: vertical;
+        margin-left: -3em;
+
+       
+
 }
 button[type="submit"] {
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: #fff;
-	background: rgb(136,136,136);
+	background: rgb(219, 218, 218);
 	border: none;
 	border-radius: 0.2em;
 	padding: 0.5em 2em;
 	cursor: pointer;
 	transition: background 0.2s;
+    margin-left: -2.5em;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    color: #000;
+
 }
 button[type="submit"]:hover {
 	background: rgb(114,172,69);
@@ -251,20 +274,22 @@ footer {
 	text-align: center;
 }
 .cadeau-banner img {
-	width: calc(100% - 3em); /* enlève 1.5em à gauche et 1.5em à droite */
+	width: calc(100% - 3em); 
 	max-width: 100%;
 	border-radius: 0.5em;
-	margin: 0 1.5em; /* marge gauche et droite */
-	display: block;  /* pour bien centrer */
+	margin: 0 1.5em; 
+	display: block; 
+    margin-top : -3em;
 }
 
 .sources {
-	font-size: 0.7em;
+	font-size: 1.5em;
 	color: #fff;
 	background: rgb(136,136,136);
 	padding: 0.5em 1em;
 	border-radius: 0.2em;
 	margin-top: 1em;
+    
 }
 .sources a {
 	color: #fff;
