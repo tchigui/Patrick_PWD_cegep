@@ -1,0 +1,51 @@
+/* === Variables (unités relatives, pas de px) === */
+$space: 1rem;
+$maxw: 90rem;
+$text: hsl(220 20% 20%);
+$text-dark: hsl(0 0% 98%);
+
+/* 4 couleurs de fond différentes (exigence) */
+$bg-header: hsl(280 70% 20%);
+$bg-sidebar: hsl(200 70% 18%);
+$bg-main: hsl(210 30% 97%);
+$bg-footer: hsl(40 90% 92%);
+
+/* === Reset + accessibilité === */
+* { box-sizing: border-box; }
+html { font-size: 100%; }
+body {
+  margin: 0;
+  color: $text;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+}
+.sr-only {
+  position: absolute;
+  width: 1ch; height: 1ch; margin: -1ch;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* === GRILLE PRINCIPALE === */
+.layout {
+  display: grid;
+  grid-template-columns: 18rem 1fr; /* aside + contenu */
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+  min-height: 100vh;
+  max-width: $maxw;
+  margin-inline: auto;
+}
+
+.header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: $space; }
+.sidebar { grid-area: sidebar; background: $bg-sidebar; color: $text-dark; padding: $space; }
+.content { grid-area: content; background: $bg-main;   padding: $space; }
+.footer  { grid-area: footer;  background: $bg-footer;  padding: $space; text-align: center; }
+
+/* Aide visuelle (en dev) — facultatif, tu pourras retirer */
+.header  { outline: .15rem solid hsl(280 70% 30% / .3); }
+.sidebar { outline: .15rem solid hsl(200 70% 30% / .3); }
+.content { outline: .15rem solid hsl(210 30% 50% / .15); }
+.footer  { outline: .15rem solid hsl(40 80% 40% / .2); }
