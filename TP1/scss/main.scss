@@ -20,3 +20,21 @@ $bg-footer: hsl(40 90% 92%);
 html { font-size: 100%; }
 body { margin: 0; color: $text; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif; font-size: $font-base; }
 .sr-only { position: absolute; width: 1ch; height: 1ch; margin: -1ch; clip: rect(0 0 0 0); overflow: hidden; }
+.layout {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+  min-height: 100vh;
+  max-width: $maxw; margin-inline: auto;
+}
+.header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: calc($space*1.25) $space; }
+.sidebar { grid-area: sidebar; background: $bg-sidebar; color: $text-dark; padding: calc($space*1.25); }
+.content { grid-area: content; background: $bg-main;   padding: calc($space*1.25); }
+.footer  { grid-area: footer;  background: $bg-footer;  padding: $space; text-align: center; }
+
+.brand { margin: 0 0 $space 0; font-size: $font-title; line-height: 1.1; color: $brand; }
+.tagline { margin: 0; opacity: .9; }

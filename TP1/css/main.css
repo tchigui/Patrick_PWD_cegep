@@ -24,3 +24,52 @@ body {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header header" "sidebar content" "footer footer";
+  min-height: 100vh;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.header {
+  grid-area: header;
+  background: hsl(280, 70%, 20%);
+  color: hsl(0, 0%, 98%);
+  padding: 1.25rem 1rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: hsl(200, 70%, 18%);
+  color: hsl(0, 0%, 98%);
+  padding: 1.25rem;
+}
+
+.content {
+  grid-area: content;
+  background: hsl(210, 30%, 97%);
+  padding: 1.25rem;
+}
+
+.footer {
+  grid-area: footer;
+  background: hsl(40, 90%, 92%);
+  padding: 1rem;
+  text-align: center;
+}
+
+.brand {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
+  line-height: 1.1;
+  color: hsl(45, 100%, 55%);
+}
+
+.tagline {
+  margin: 0;
+  opacity: 0.9;
+}
