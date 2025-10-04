@@ -38,3 +38,25 @@ body { margin: 0; color: $text; font-family: system-ui, -apple-system, "Segoe UI
 
 .brand { margin: 0 0 $space 0; font-size: $font-title; line-height: 1.1; color: $brand; }
 .tagline { margin: 0; opacity: .9; }
+
+$icon: 1.25rem;
+
+@mixin sprite($x, $y, $w, $h) {
+  background-image: url('../img/spritesheet.png');
+  background-repeat: no-repeat;
+  background-position: $x $y;
+  width: $w; height: $h; display: inline-block;
+}
+
+.nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc($space*.75); }
+.nav__link { color: $text-dark; text-decoration: none; display: inline-grid; grid-auto-flow: column; align-items: center; gap: .75rem; }
+.nav__link:hover, .nav__link:focus { text-decoration: underline; }
+
+.ico { @include sprite(0 0, $icon, $icon); }
+/* Positions provisoires (on ajustera après) */
+.ico--1 { background-position:   0      0; }
+.ico--2 { background-position:  -1.5rem 0; }
+.ico--3 { background-position:  -3rem   0; }
+.ico--4 { background-position:  -4.5rem 0; }
+.ico--5 { background-position:  -6rem   0; }
+
