@@ -3,113 +3,115 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="TP1 – 12 films : CSS Grid + Flexbox, spritesheet unique, responsive mobile." />
-
   <title>TP1 – Mes 12 films préférés</title>
   <link rel="stylesheet" href="css/main.min.css" />
-  <link rel="preload" as="image" href="img/spritesheet.png" />
-
 </head>
 <body>
-  <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
-
-   <div class="layout">
-<div class="layout">
+  <!-- Header full-bleed avec contenu centré -->
   <header class="header">
-  <div class="container header__inner">
-    <h1 class="brand">🎬 Ma Cinéthèque – 12 coups de cœur</h1>
-    <p class="tagline">Des classiques, des voyages, des frissons — à (re)voir absolument.</p>
-  </div>
-</header>
+    <div class="container header__inner">
+      <h1 class="brand">🎬 Ma Cinéthèque – 12 coups de cœur</h1>
+      <p class="tagline">Des classiques, des voyages, des frissons — à (re)voir absolument.</p>
+    </div>
+  </header>
 
->
+  <!-- Mise en page full-width (Option B) -->
+  <div class="layout">
+    <aside class="sidebar">
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a class="nav__link ico ico--1" href="https://www.imdb.com/" target="_blank" rel="noopener">IMDb</a></li>
+          <li><a class="nav__link ico ico--2" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">Rotten Tomatoes</a></li>
+          <li><a class="nav__link ico ico--3" href="https://www.allocine.fr/" target="_blank" rel="noopener">AlloCiné</a></li>
+          <li><a class="nav__link ico ico--4" href="https://fr.wikipedia.org/wiki/Cin%C3%A9ma" target="_blank" rel="noopener">Wikipédia – Cinéma</a></li>
+          <li><a class="nav__link ico ico--5" href="https://letterboxd.com/" target="_blank" rel="noopener">Letterboxd</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-  <aside class="sidebar" aria-label="Menu des sources cinéma">
-    <nav class="nav" aria-label="Sources cinéma">
-      <ul class="nav__list">
-        <li><a class="nav__link ico ico--1" href="https://www.imdb.com/" target="_blank" rel="noopener">IMDb</a></li>
-<li><a class="nav__link ico ico--2" href="https://www.rottentomatoes.com/" target="_blank" rel="noopener">Rotten Tomatoes</a></li>
-<li><a class="nav__link ico ico--3" href="https://www.allocine.fr/" target="_blank" rel="noopener">AlloCiné</a></li>
-<li><a class="nav__link ico ico--4" href="https://fr.wikipedia.org/wiki/Cin%C3%A9ma" target="_blank" rel="noopener">Wikipédia – Cinéma</a></li>
-<li><a class="nav__link ico ico--5" href="https://letterboxd.com/" target="_blank" rel="noopener">Letterboxd</a></li>
+    <main class="content" id="contenu-principal">
+      <div class="container">
+        <h2 class="sr-only">Mes 12 films</h2>
+        <section class="tiles" aria-label="Grille des films">
+          <!-- 01 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Inception" target="_blank" rel="noopener" aria-label="Ouvrir la fiche du film Inception sur Wikipédia">
+            <span class="poster poster--m1" aria-hidden="true"></span>
+            <span class="tile__title">Inception</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 02 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Interstellar" target="_blank" rel="noopener" aria-label="Ouvrir la fiche du film Interstellar sur Wikipédia">
+            <span class="poster poster--m2" aria-hidden="true"></span>
+            <span class="tile__title">Interstellar</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 03 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/The_Dark_Knight:_Le_Chevalier_noir" target="_blank" rel="noopener" aria-label="Ouvrir The Dark Knight sur Wikipédia">
+            <span class="poster poster--m3" aria-hidden="true"></span>
+            <span class="tile__title">The Dark Knight</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 04 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Parasite_(film,_2019)" target="_blank" rel="noopener">
+            <span class="poster poster--m4" aria-hidden="true"></span>
+            <span class="tile__title">Parasite</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 05 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Le_Voyage_de_Chihiro" target="_blank" rel="noopener">
+            <span class="poster poster--m5" aria-hidden="true"></span>
+            <span class="tile__title">Le Voyage de Chihiro</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 06 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Le_Seigneur_des_anneaux_:_La_Communaut%C3%A9_de_l%27anneau" target="_blank" rel="noopener">
+            <span class="poster poster--m6" aria-hidden="true"></span>
+            <span class="tile__title">La Communauté de l’Anneau</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 07 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Forrest_Gump" target="_blank" rel="noopener">
+            <span class="poster poster--m7" aria-hidden="true"></span>
+            <span class="tile__title">Forrest Gump</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 08 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Le_Fabuleux_Destin_d%27Am%C3%A9lie_Poulain" target="_blank" rel="noopener">
+            <span class="poster poster--m8" aria-hidden="true"></span>
+            <span class="tile__title">Amélie</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 09 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Gladiator" target="_blank" rel="noopener">
+            <span class="poster poster--m9" aria-hidden="true"></span>
+            <span class="tile__title">Gladiator</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 10 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Les_Dents_de_la_mer" target="_blank" rel="noopener">
+            <span class="poster poster--m10" aria-hidden="true"></span>
+            <span class="tile__title">Les Dents de la mer</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 11 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Pulp_Fiction" target="_blank" rel="noopener">
+            <span class="poster poster--m11" aria-hidden="true"></span>
+            <span class="tile__title">Pulp Fiction</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+          <!-- 12 -->
+          <a class="tile" href="https://fr.wikipedia.org/wiki/Your_Name." target="_blank" rel="noopener">
+            <span class="poster poster--m12" aria-hidden="true"></span>
+            <span class="tile__title">Your Name</span>
+            <span class="tile__link">Voir la description</span>
+          </a>
+        </section>
+      </div>
+    </main>
 
-      </ul>
-    </nav>
-  </aside>
-
-  <main class="content" id="contenu-principal">
-    <h2 class="sr-only">Mes 12 films préférés</h2>
-    <section class="tiles" aria-label="Grille des films">
-      <a class="tile" href="https://fr.wikipedia.org/wiki/Inception" target="_blank" rel="noopener">
-  <span class="poster poster--m1" aria-hidden="true"></span>
-  <span class="tile__title">Inception</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Interstellar" target="_blank" rel="noopener">
-  <span class="poster poster--m2" aria-hidden="true"></span>
-  <span class="tile__title">Interstellar</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/The_Dark_Knight:_Le_Chevalier_noir" target="_blank" rel="noopener">
-  <span class="poster poster--m3" aria-hidden="true"></span>
-  <span class="tile__title">The Dark Knight</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Parasite_(film,_2019)" target="_blank" rel="noopener">
-  <span class="poster poster--m4" aria-hidden="true"></span>
-  <span class="tile__title">Parasite</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Le_Voyage_de_Chihiro" target="_blank" rel="noopener">
-  <span class="poster poster--m5" aria-hidden="true"></span>
-  <span class="tile__title">Le Voyage de Chihiro</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Le_Seigneur_des_anneaux_:_La_Communaut%C3%A9_de_l%27anneau" target="_blank" rel="noopener">
-  <span class="poster poster--m6" aria-hidden="true"></span>
-  <span class="tile__title">La Communauté de l’Anneau</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Forrest_Gump" target="_blank" rel="noopener">
-  <span class="poster poster--m7" aria-hidden="true"></span>
-  <span class="tile__title">Forrest Gump</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Le_Fabuleux_Destin_d%27Am%C3%A9lie_Poulain" target="_blank" rel="noopener">
-  <span class="poster poster--m8" aria-hidden="true"></span>
-  <span class="tile__title">Amélie</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Gladiator" target="_blank" rel="noopener">
-  <span class="poster poster--m9" aria-hidden="true"></span>
-  <span class="tile__title">Gladiator</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Les_Dents_de_la_mer" target="_blank" rel="noopener">
-  <span class="poster poster--m10" aria-hidden="true"></span>
-  <span class="tile__title">Les Dents de la mer</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Pulp_Fiction" target="_blank" rel="noopener">
-  <span class="poster poster--m11" aria-hidden="true"></span>
-  <span class="tile__title">Pulp Fiction</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-<a class="tile" href="https://fr.wikipedia.org/wiki/Your_Name." target="_blank" rel="noopener">
-  <span class="poster poster--m12" aria-hidden="true"></span>
-  <span class="tile__title">Your Name</span>
-  <span class="tile__link">Voir la description</span>
-</a>
-
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <p>Réalisé par <strong>Williams AKONO</strong> — <a href="mailto:wakono64@gmail.com">Me contacter</a></p>
-  </footer>
-</div>
-
-
+    <footer class="footer">
+      <p>Par <strong>Williams AKONO</strong> — <a href="mailto:wakono64@gmail.com">Me contacter</a></p>
+    </footer>
   </div>
 </body>
 </html>

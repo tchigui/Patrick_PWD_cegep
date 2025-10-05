@@ -1,6 +1,4 @@
 @charset "UTF-8";
-/* === Variables (unités relatives) === */
-/* Palette accessible & harmonisée */
 /* === Reset + base === */
 * {
   box-sizing: border-box;
@@ -52,7 +50,7 @@ a:hover, a:focus {
 /* === Grille full width (Option B) === */
 .layout {
   display: grid;
-  grid-template-columns: 20rem minmax(0, 1fr); /* sidebar un peu plus large */
+  grid-template-columns: 20rem minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas: "header header" "sidebar content" "footer footer";
   min-height: 100vh;
@@ -102,9 +100,7 @@ a:hover, a:focus {
   opacity: 0.9;
 }
 
-/* === Sprite: mixin (4 paramètres) === */
 /* === Menu + icônes (sprite) === */
-/* Liste du menu */
 .nav__list {
   list-style: none;
   margin: 0;
@@ -113,7 +109,6 @@ a:hover, a:focus {
   gap: 0.75rem;
 }
 
-/* Lien du menu : icône + texte alignés sur 1 ligne */
 .nav__link {
   color: hsl(0, 0%, 99%);
   text-decoration: none;
@@ -161,8 +156,6 @@ a:hover, a:focus {
 }
 
 /* === Tuiles (Flexbox) + affiches (sprite) === */
-/* 160px */
-/* 240px */
 .tiles {
   display: flex;
   flex-wrap: wrap;
@@ -174,18 +167,19 @@ a:hover, a:focus {
   background: #fff;
   border-radius: 1.25rem;
   padding: 1rem;
-  inline-size: 12rem; /* largeur fixe -> plusieurs colonnes */
+  inline-size: 12rem;
   display: inline-grid;
   justify-items: center;
   text-align: center;
   text-decoration: none;
   color: inherit;
   box-shadow: 0 0.25rem 1rem hsla(220, 30%, 10%, 0.08);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tile:hover, .tile:focus {
   transform: translateY(-0.25rem) scale(1.02);
+  box-shadow: 0 0.5rem 2rem hsla(220, 30%, 10%, 0.12);
 }
 
 .tile__title {
