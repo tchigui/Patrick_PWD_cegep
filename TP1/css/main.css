@@ -1,5 +1,9 @@
 @charset "UTF-8";
 /* === Variables (unités relatives) === */
+/* Palette accessible & harmonisée */
+/* plus sombre -> meilleur contraste */
+/* texte sur fonds foncés */
+/* accent lisible */
 /* === Reset + base === */
 * {
   box-sizing: border-box;
@@ -11,9 +15,17 @@ html {
 
 body {
   margin: 0;
-  color: hsl(220, 20%, 20%);
+  color: hsl(220, 20%, 18%);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.95rem, 0.4vw + 0.9rem, 1.125rem);
+}
+
+a {
+  color: hsl(220, 70%, 35%);
+}
+
+a:hover, a:focus {
+  color: hsl(220, 75%, 30%);
 }
 
 .sr-only {
@@ -38,15 +50,15 @@ body {
 
 .header {
   grid-area: header;
-  background: hsl(280, 70%, 20%);
-  color: hsl(0, 0%, 98%);
+  background: hsl(280, 65%, 18%);
+  color: hsl(0, 0%, 99%);
   padding: 1.25rem 1rem;
 }
 
 .sidebar {
   grid-area: sidebar;
-  background: hsl(200, 70%, 18%);
-  color: hsl(0, 0%, 98%);
+  background: hsl(220, 45%, 16%);
+  color: hsl(0, 0%, 99%);
   padding: 1.25rem;
 }
 
@@ -58,7 +70,8 @@ body {
 
 .footer {
   grid-area: footer;
-  background: hsl(40, 90%, 92%);
+  background: hsl(48, 80%, 90%);
+  color: hsl(220, 20%, 18%);
   padding: 1rem;
   text-align: center;
 }
@@ -68,7 +81,7 @@ body {
   margin: 0 0 1rem 0;
   font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
   line-height: 1.1;
-  color: hsl(45, 100%, 55%);
+  color: hsl(48, 100%, 52%);
 }
 
 .tagline {
@@ -78,6 +91,8 @@ body {
 
 /* === Sprite: mixin (4 paramètres) === */
 /* === Menu + icônes (sprite) === */
+/* 32px, correspond à la spritesheet */
+/* Liste du menu */
 .nav__list {
   list-style: none;
   margin: 0;
@@ -86,13 +101,17 @@ body {
   gap: 0.75rem;
 }
 
+/* Lien du menu : icône + texte alignés sur 1 ligne */
 .nav__link {
-  color: hsl(0, 0%, 98%);
+  color: hsl(0, 0%, 99%);
   text-decoration: none;
-  display: inline-grid;
-  grid-auto-flow: column;
+  display: grid;
+  grid-template-columns: 2rem auto; /* col 1 = icône, col 2 = texte */
   align-items: center;
-  gap: 0.75rem;
+  column-gap: 0.75rem;
+  white-space: nowrap; /* évite le retour à la ligne du texte */
+  overflow: hidden;
+  text-overflow: ellipsis; /* "…" si ça dépasse */
 }
 
 .nav__link:hover, .nav__link:focus {
@@ -130,14 +149,9 @@ body {
   background-position: -8rem 0;
 }
 
-/* Accessibilité: focus visible */
-.nav__link:focus-visible,
-.tile:focus-visible {
-  outline: 0.2rem solid hsla(220, 80%, 50%, 0.9);
-  outline-offset: 0.2rem;
-}
-
 /* === Tuiles (Flexbox) + affiches (sprite) === */
+/* 160px */
+/* 240px */
 .tiles {
   display: flex;
   flex-wrap: wrap;
@@ -169,8 +183,12 @@ body {
 
 .tile__link {
   font-size: 0.9em;
-  color: hsl(220, 60%, 40%);
+  color: hsl(220, 70%, 35%);
   text-decoration: underline;
+}
+
+.tile__link:hover {
+  color: hsl(220, 75%, 30%);
 }
 
 /* Appel mixin CORRECT (4 args) */
@@ -235,35 +253,20 @@ body {
   background-position: -20rem -47rem;
 }
 
-@media (max-width: 50rem) {
-  .layout {
-    grid-template-columns: 1fr;
-    grid-template-areas: "header" "content" "footer";
-  }
-  .sidebar {
-    display: none;
-  }
-  .tiles {
-    justify-content: center;
-  }
+/* === Accessibilité: focus visible (unique, sans doublon) === */
+.nav__link:focus-visible,
+.tile:focus-visible {
+  outline: 0.2rem solid hsl(220, 90%, 45%);
+  outline-offset: 0.2rem;
 }
-@media (max-width: 50rem) {
-  .poster {
-    width: 7.5rem;
-    height: 11.25rem;
-  }
-}
-@media (max-width: 50rem) {
-  .tile__title, .tile__link {
-    display: none;
-  }
-}
+
+/* === Skip-link (accessibilité) === */
 .skip-link {
   position: absolute;
   left: -100vw;
   top: 0;
   padding: 0.75rem 1rem;
-  background: hsl(45, 100%, 55%);
+  background: hsl(48, 100%, 52%);
   color: black;
   text-decoration: none;
   border-radius: 0.5rem;
@@ -274,12 +277,26 @@ body {
   top: 1rem;
 }
 
-.nav__link:focus-visible, .tile:focus-visible {
-  outline: 0.2rem solid hsla(220, 80%, 50%, 0.9);
-  outline-offset: 0.2rem;
-}
-
-.nav__link:focus-visible, .tile:focus-visible {
-  outline: 0.2rem solid hsla(220, 80%, 50%, 0.9);
-  outline-offset: 0.2rem;
+/* === Responsive mobile (≤ 50rem ~ 800px) === */
+@media (max-width: 50rem) {
+  /* Layout 1 colonne + menu caché */
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "content" "footer";
+  }
+  .sidebar {
+    display: none;
+  }
+  /* Tuiles centrées et posters plus petits */
+  .tiles {
+    justify-content: center;
+  }
+  .poster {
+    width: 7.5rem;
+    height: 11.25rem;
+  }
+  /* Étape 16: cacher le titre et le lien */
+  .tile__title, .tile__link {
+    display: none;
+  }
 }
