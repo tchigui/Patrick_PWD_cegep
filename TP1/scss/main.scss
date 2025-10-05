@@ -1,4 +1,4 @@
-/* Variables (unités relatives) */
+/* === Variables (unités relatives) === */
 $space: 1rem;
 $radius: 1.25rem;
 $maxw: 90rem;
@@ -15,11 +15,18 @@ $bg-sidebar: hsl(200 70% 18%);
 $bg-main: hsl(210 30% 97%);
 $bg-footer: hsl(40 90% 92%);
 
-/* Reset + base */
+/* === Reset + base === */
 * { box-sizing: border-box; }
 html { font-size: 100%; }
-body { margin: 0; color: $text; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif; font-size: $font-base; }
+body {
+  margin: 0;
+  color: $text;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  font-size: $font-base;
+}
 .sr-only { position: absolute; width: 1ch; height: 1ch; margin: -1ch; clip: rect(0 0 0 0); overflow: hidden; }
+
+/* === Grille === */
 .layout {
   display: grid;
   grid-template-columns: 18rem 1fr;
@@ -29,104 +36,80 @@ body { margin: 0; color: $text; font-family: system-ui, -apple-system, "Segoe UI
     "sidebar content"
     "footer footer";
   min-height: 100vh;
-  max-width: $maxw; margin-inline: auto;
+  max-width: $maxw;
+  margin-inline: auto;
 }
 .header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: calc($space*1.25) $space; }
 .sidebar { grid-area: sidebar; background: $bg-sidebar; color: $text-dark; padding: calc($space*1.25); }
 .content { grid-area: content; background: $bg-main;   padding: calc($space*1.25); }
 .footer  { grid-area: footer;  background: $bg-footer;  padding: $space; text-align: center; }
 
-.brand { margin: 0 0 $space 0; font-size: $font-title; line-height: 1.1; color: $brand; }
-.tagline { margin: 0; opacity: .9; }
+/* Bandeau */
+.brand  { margin: 0 0 $space 0; font-size: $font-title; line-height: 1.1; color: $brand; }
+.tagline{ margin: 0; opacity: .9; }
 
-/* === Sprite + Menu === */
-$icon: 1.25rem;
-
-/* mixin avec 4 paramètres */
+/* === Sprite: mixin (4 paramètres) === */
 @mixin sprite($x, $y, $w, $h){
-  background-image:url('../img/spritesheet.png');
-  background-repeat:no-repeat;
-  background-position:$x $y;
-  width:$w; height:$h; display:inline-block;
+  background-image: url('../img/spritesheet.png');
+  background-repeat: no-repeat;
+  background-position: $x $y;
+  width: $w; height: $h; display: inline-block;
 }
 
-.nav__list{ list-style:none; margin:0; padding:0; display:grid; gap:calc($space*.75); }
-.nav__link{ color:$text-dark; text-decoration:none; display:inline-grid; grid-auto-flow:column; align-items:center; gap:.75rem; }
-.nav__link:hover,.nav__link:focus{ text-decoration:underline; }
+/* === Menu + icônes (sprite) === */
+$icon: 2rem;             // 32px, correspond à la spritesheet
+.nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc($space*.75); }
+.nav__link { color: $text-dark; text-decoration: none; display: inline-grid; grid-auto-flow: column; align-items: center; gap: .75rem; }
+.nav__link:hover, .nav__link:focus { text-decoration: underline; }
 
-/* ✅ mixin appelé correctement (0, 0, $icon, $icon) */
-.ico{ @include sprite(0, 0, $icon, $icon); }
+/* Appel mixin CORRECT (4 args) */
+.ico { @include sprite(0, 0, $icon, $icon); }
 
-/* positions provisoires (ajuster après sprite) */
-.ico--1{ background-position:   0       0; }
-.ico--2{ background-position:  -1.5rem  0; }
-.ico--3{ background-position:  -3rem    0; }
-.ico--4{ background-position:  -4.5rem  0; }
-.ico--5{ background-position:  -6rem    0; }
-.nav__link:focus-visible, .tile:focus-visible{
-  outline:.2rem solid hsl(220 80% 50% / .9);
-  outline-offset:.2rem;
-}
-
-$poster-w: 10rem; $poster-h: 15rem;
-
-.tiles{ display:flex; flex-wrap:wrap; gap:$space; }
-.tile{
-  background:#fff; border-radius:$radius; padding:$space; width:max-content;
-  display:inline-grid; justify-items:center; text-align:center; text-decoration:none; color:inherit;
-  box-shadow:0 0.25rem 1rem hsl(220 30% 10% / .08); transition:transform .2s ease;
-}
-.tile:hover,.tile:focus{ transform:translateY(-0.25rem) scale(1.02); }
-.tile__title{ margin-block:.5rem 0; font-weight:700; }
-.tile__link{ font-size:.9em; color:hsl(220 60% 40%); text-decoration:underline; }
-
-/* ✅ mixin appelé correctement (0, 0, $poster-w, $poster-h) */
-.poster{ @include sprite(0, 0, $poster-w, $poster-h); border-radius:calc($radius - .25rem); background-color:hsl(220 10% 95%); }
-
-/* positions provisoires (à ajuster après) */
-.poster--m1  { background-position:   0       -3rem; }
-.poster--m2  { background-position:  -10.5rem -3rem; }
-.poster--m3  { background-position:  -21rem   -3rem; }
-.poster--m4  { background-position:   0       -18.5rem; }
-.poster--m5  { background-position:  -10.5rem -18.5rem; }
-.poster--m6  { background-position:  -21rem   -18.5rem; }
-.poster--m7  { background-position:   0       -34rem; }
-.poster--m8  { background-position:  -10.5rem -34rem; }
-.poster--m9  { background-position:  -21rem   -34rem; }
-.poster--m10 { background-position:   0       -49.5rem; }
-.poster--m11 { background-position:  -10.5rem -49.5rem; }
-.poster--m12 { background-position:  -21rem   -49.5rem; }
-$icon: 2rem;          // 32px
-$poster-w: 10rem;     // 160px
-$poster-h: 15rem;     // 240px
-
-.ico    { @include sprite(0, 0, $icon, $icon); }
-.poster { @include sprite(0, 0, $poster-w, $poster-h); }
-
+/* Positions EXACTES des 5 icônes (spritesheet fournie) */
 .ico--1 { background-position:   0     0; }
 .ico--2 { background-position:  -2rem  0; }
 .ico--3 { background-position:  -4rem  0; }
 .ico--4 { background-position:  -6rem  0; }
 .ico--5 { background-position:  -8rem  0; }
 
-/* rangée 1 */
+/* Accessibilité: focus visible */
+.nav__link:focus-visible,
+.tile:focus-visible {
+  outline: .2rem solid hsl(220 80% 50% / .9);
+  outline-offset: .2rem;
+}
+
+/* === Tuiles (Flexbox) + affiches (sprite) === */
+$poster-w: 10rem;        // 160px
+$poster-h: 15rem;        // 240px
+
+.tiles { display: flex; flex-wrap: wrap; gap: $space; }
+.tile  {
+  background: #fff; border-radius: $radius; padding: $space; width: max-content;
+  display: inline-grid; justify-items: center; text-align: center; text-decoration: none; color: inherit;
+  box-shadow: 0 0.25rem 1rem hsl(220 30% 10% / .08); transition: transform .2s ease;
+}
+.tile:hover, .tile:focus { transform: translateY(-0.25rem) scale(1.02); }
+.tile__title { margin-block: .5rem 0; font-weight: 700; }
+.tile__link  { font-size: .9em; color: hsl(220 60% 40%); text-decoration: underline; }
+
+/* Appel mixin CORRECT (4 args) */
+.poster { @include sprite(0, 0, $poster-w, $poster-h); border-radius: calc($radius - .25rem); background-color: hsl(220 10% 95%); }
+
+/* Positions EXACTES des 12 affiches (spritesheet fournie) */
+/* Colonnes: x = 0 / -10rem / -20rem ; Lignes sous icônes: y = -2rem / -17rem / -32rem / -47rem */
 .poster--m1  { background-position:   0     -2rem; }
 .poster--m2  { background-position: -10rem -2rem; }
 .poster--m3  { background-position: -20rem -2rem; }
 
-/* rangée 2 */
 .poster--m4  { background-position:   0     -17rem; }
 .poster--m5  { background-position: -10rem -17rem; }
 .poster--m6  { background-position: -20rem -17rem; }
 
-/* rangée 3 */
 .poster--m7  { background-position:   0     -32rem; }
 .poster--m8  { background-position: -10rem -32rem; }
 .poster--m9  { background-position: -20rem -32rem; }
 
-/* rangée 4 */
 .poster--m10 { background-position:   0     -47rem; }
 .poster--m11 { background-position: -10rem -47rem; }
 .poster--m12 { background-position: -20rem -47rem; }
-
-
