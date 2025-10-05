@@ -253,3 +253,8 @@ body {
     height: 11.25rem;
   }
 }
+@media (max-width: 50rem) {
+  .tile__title, .tile__link {
+    display: none;
+  }
+}

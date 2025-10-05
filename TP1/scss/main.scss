@@ -131,3 +131,7 @@ $poster-w-sm: 7.5rem; $poster-h-sm: 11.25rem;
 @media (max-width: 50rem){
   .poster{ width:$poster-w-sm; height:$poster-h-sm; }
 }
+
+@media (max-width: 50rem){
+  .tile__title, .tile__link{ display:none; }
+}
