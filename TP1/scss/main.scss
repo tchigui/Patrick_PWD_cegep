@@ -68,3 +68,33 @@ $icon: 1.25rem;
   outline-offset:.2rem;
 }
 
+$poster-w: 10rem; $poster-h: 15rem;
+
+.tiles{ display:flex; flex-wrap:wrap; gap:$space; }
+.tile{
+  background:#fff; border-radius:$radius; padding:$space; width:max-content;
+  display:inline-grid; justify-items:center; text-align:center; text-decoration:none; color:inherit;
+  box-shadow:0 0.25rem 1rem hsl(220 30% 10% / .08); transition:transform .2s ease;
+}
+.tile:hover,.tile:focus{ transform:translateY(-0.25rem) scale(1.02); }
+.tile__title{ margin-block:.5rem 0; font-weight:700; }
+.tile__link{ font-size:.9em; color:hsl(220 60% 40%); text-decoration:underline; }
+
+/* ✅ mixin appelé correctement (0, 0, $poster-w, $poster-h) */
+.poster{ @include sprite(0, 0, $poster-w, $poster-h); border-radius:calc($radius - .25rem); background-color:hsl(220 10% 95%); }
+
+/* positions provisoires (à ajuster après) */
+.poster--m1  { background-position:   0       -3rem; }
+.poster--m2  { background-position:  -10.5rem -3rem; }
+.poster--m3  { background-position:  -21rem   -3rem; }
+.poster--m4  { background-position:   0       -18.5rem; }
+.poster--m5  { background-position:  -10.5rem -18.5rem; }
+.poster--m6  { background-position:  -21rem   -18.5rem; }
+.poster--m7  { background-position:   0       -34rem; }
+.poster--m8  { background-position:  -10.5rem -34rem; }
+.poster--m9  { background-position:  -21rem   -34rem; }
+.poster--m10 { background-position:   0       -49.5rem; }
+.poster--m11 { background-position:  -10.5rem -49.5rem; }
+.poster--m12 { background-position:  -21rem   -49.5rem; }
+
+
