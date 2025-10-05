@@ -63,4 +63,8 @@ $icon: 1.25rem;
 .ico--3{ background-position:  -3rem    0; }
 .ico--4{ background-position:  -4.5rem  0; }
 .ico--5{ background-position:  -6rem    0; }
+.nav__link:focus-visible, .tile:focus-visible{
+  outline:.2rem solid hsl(220 80% 50% / .9);
+  outline-offset:.2rem;
+}
 
