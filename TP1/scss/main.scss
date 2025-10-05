@@ -127,3 +127,7 @@ $poster-w-sm: 7.5rem; $poster-h-sm: 11.25rem;
   .sidebar{ display:none; }
   .tiles{ justify-content:center; }
 }
+
+@media (max-width: 50rem){
+  .poster{ width:$poster-w-sm; height:$poster-h-sm; }
+}

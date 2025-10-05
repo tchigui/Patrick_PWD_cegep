@@ -247,3 +247,9 @@ body {
     justify-content: center;
   }
 }
+@media (max-width: 50rem) {
+  .poster {
+    width: 7.5rem;
+    height: 11.25rem;
+  }
+}
