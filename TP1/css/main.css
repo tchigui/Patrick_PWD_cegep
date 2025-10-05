@@ -266,3 +266,55 @@ body {
 .ico--5 {
   background-position: -8rem 0;
 }
+
+/* rangée 1 */
+.poster--m1 {
+  background-position: 0 -2rem;
+}
+
+.poster--m2 {
+  background-position: -10rem -2rem;
+}
+
+.poster--m3 {
+  background-position: -20rem -2rem;
+}
+
+/* rangée 2 */
+.poster--m4 {
+  background-position: 0 -17rem;
+}
+
+.poster--m5 {
+  background-position: -10rem -17rem;
+}
+
+.poster--m6 {
+  background-position: -20rem -17rem;
+}
+
+/* rangée 3 */
+.poster--m7 {
+  background-position: 0 -32rem;
+}
+
+.poster--m8 {
+  background-position: -10rem -32rem;
+}
+
+.poster--m9 {
+  background-position: -20rem -32rem;
+}
+
+/* rangée 4 */
+.poster--m10 {
+  background-position: 0 -47rem;
+}
+
+.poster--m11 {
+  background-position: -10rem -47rem;
+}
+
+.poster--m12 {
+  background-position: -20rem -47rem;
+}
