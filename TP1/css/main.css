@@ -1,6 +1,6 @@
 @charset "UTF-8";
-/* Variables (unités relatives) */
-/* Reset + base */
+/* === Variables (unités relatives) === */
+/* === Reset + base === */
 * {
   box-sizing: border-box;
 }
@@ -25,6 +25,7 @@ body {
   overflow: hidden;
 }
 
+/* === Grille === */
 .layout {
   display: grid;
   grid-template-columns: 18rem 1fr;
@@ -62,6 +63,7 @@ body {
   text-align: center;
 }
 
+/* Bandeau */
 .brand {
   margin: 0 0 1rem 0;
   font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
@@ -74,8 +76,8 @@ body {
   opacity: 0.9;
 }
 
-/* === Sprite + Menu === */
-/* mixin avec 4 paramètres */
+/* === Sprite: mixin (4 paramètres) === */
+/* === Menu + icônes (sprite) === */
 .nav__list {
   list-style: none;
   margin: 0;
@@ -97,42 +99,45 @@ body {
   text-decoration: underline;
 }
 
-/* ✅ mixin appelé correctement (0, 0, $icon, $icon) */
+/* Appel mixin CORRECT (4 args) */
 .ico {
   background-image: url("../img/spritesheet.png");
   background-repeat: no-repeat;
   background-position: 0 0;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 2rem;
+  height: 2rem;
   display: inline-block;
 }
 
-/* positions provisoires (ajuster après sprite) */
+/* Positions EXACTES des 5 icônes (spritesheet fournie) */
 .ico--1 {
   background-position: 0 0;
 }
 
 .ico--2 {
-  background-position: -1.5rem 0;
+  background-position: -2rem 0;
 }
 
 .ico--3 {
-  background-position: -3rem 0;
+  background-position: -4rem 0;
 }
 
 .ico--4 {
-  background-position: -4.5rem 0;
-}
-
-.ico--5 {
   background-position: -6rem 0;
 }
 
-.nav__link:focus-visible, .tile:focus-visible {
+.ico--5 {
+  background-position: -8rem 0;
+}
+
+/* Accessibilité: focus visible */
+.nav__link:focus-visible,
+.tile:focus-visible {
   outline: 0.2rem solid hsla(220, 80%, 50%, 0.9);
   outline-offset: 0.2rem;
 }
 
+/* === Tuiles (Flexbox) + affiches (sprite) === */
 .tiles {
   display: flex;
   flex-wrap: wrap;
@@ -168,7 +173,7 @@ body {
   text-decoration: underline;
 }
 
-/* ✅ mixin appelé correctement (0, 0, $poster-w, $poster-h) */
+/* Appel mixin CORRECT (4 args) */
 .poster {
   background-image: url("../img/spritesheet.png");
   background-repeat: no-repeat;
@@ -180,94 +185,8 @@ body {
   background-color: hsl(220, 10%, 95%);
 }
 
-/* positions provisoires (à ajuster après) */
-.poster--m1 {
-  background-position: 0 -3rem;
-}
-
-.poster--m2 {
-  background-position: -10.5rem -3rem;
-}
-
-.poster--m3 {
-  background-position: -21rem -3rem;
-}
-
-.poster--m4 {
-  background-position: 0 -18.5rem;
-}
-
-.poster--m5 {
-  background-position: -10.5rem -18.5rem;
-}
-
-.poster--m6 {
-  background-position: -21rem -18.5rem;
-}
-
-.poster--m7 {
-  background-position: 0 -34rem;
-}
-
-.poster--m8 {
-  background-position: -10.5rem -34rem;
-}
-
-.poster--m9 {
-  background-position: -21rem -34rem;
-}
-
-.poster--m10 {
-  background-position: 0 -49.5rem;
-}
-
-.poster--m11 {
-  background-position: -10.5rem -49.5rem;
-}
-
-.poster--m12 {
-  background-position: -21rem -49.5rem;
-}
-
-.ico {
-  background-image: url("../img/spritesheet.png");
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  width: 2rem;
-  height: 2rem;
-  display: inline-block;
-}
-
-.poster {
-  background-image: url("../img/spritesheet.png");
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  width: 10rem;
-  height: 15rem;
-  display: inline-block;
-}
-
-.ico--1 {
-  background-position: 0 0;
-}
-
-.ico--2 {
-  background-position: -2rem 0;
-}
-
-.ico--3 {
-  background-position: -4rem 0;
-}
-
-.ico--4 {
-  background-position: -6rem 0;
-}
-
-.ico--5 {
-  background-position: -8rem 0;
-}
-
-/* rangée 1 */
+/* Positions EXACTES des 12 affiches (spritesheet fournie) */
+/* Colonnes: x = 0 / -10rem / -20rem ; Lignes sous icônes: y = -2rem / -17rem / -32rem / -47rem */
 .poster--m1 {
   background-position: 0 -2rem;
 }
@@ -280,7 +199,6 @@ body {
   background-position: -20rem -2rem;
 }
 
-/* rangée 2 */
 .poster--m4 {
   background-position: 0 -17rem;
 }
@@ -293,7 +211,6 @@ body {
   background-position: -20rem -17rem;
 }
 
-/* rangée 3 */
 .poster--m7 {
   background-position: 0 -32rem;
 }
@@ -306,7 +223,6 @@ body {
   background-position: -20rem -32rem;
 }
 
-/* rangée 4 */
 .poster--m10 {
   background-position: 0 -47rem;
 }
@@ -317,4 +233,17 @@ body {
 
 .poster--m12 {
   background-position: -20rem -47rem;
+}
+
+@media (max-width: 50rem) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "content" "footer";
+  }
+  .sidebar {
+    display: none;
+  }
+  .tiles {
+    justify-content: center;
+  }
 }
