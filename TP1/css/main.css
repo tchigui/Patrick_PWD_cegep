@@ -1,21 +1,129 @@
-/* Error: Missing argument $h.
- *     ,
- * 44  | @mixin sprite($x, $y, $w, $h) {
- *     |        ====================== declaration
- * ... |
- * 55  | .ico { @include sprite(0 0, $icon, $icon); }
- *     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invocation
- *     '
- *   scss\main.scss 55:8  sprite()
- *   scss\main.scss 55:8  root stylesheet */
+@charset "UTF-8";
+/* Variables (unités relatives) */
+/* Reset + base */
+* {
+  box-sizing: border-box;
+}
 
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Missing argument $h.\a     \2577 \a 44  \2502  @mixin sprite($x, $y, $w, $h) {\d\a     \2502         \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501  declaration\a... \2502 \a 55  \2502  .ico { @include sprite(0 0, $icon, $icon); }\d\a     \2502         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invocation\a     \2575 \a   scss\\main.scss 55:8  sprite()\a   scss\\main.scss 55:8  root stylesheet";
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  color: hsl(220, 20%, 20%);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.95rem, 0.4vw + 0.9rem, 1.125rem);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1ch;
+  height: 1ch;
+  margin: -1ch;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header header" "sidebar content" "footer footer";
+  min-height: 100vh;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.header {
+  grid-area: header;
+  background: hsl(280, 70%, 20%);
+  color: hsl(0, 0%, 98%);
+  padding: 1.25rem 1rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: hsl(200, 70%, 18%);
+  color: hsl(0, 0%, 98%);
+  padding: 1.25rem;
+}
+
+.content {
+  grid-area: content;
+  background: hsl(210, 30%, 97%);
+  padding: 1.25rem;
+}
+
+.footer {
+  grid-area: footer;
+  background: hsl(40, 90%, 92%);
+  padding: 1rem;
+  text-align: center;
+}
+
+.brand {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
+  line-height: 1.1;
+  color: hsl(45, 100%, 55%);
+}
+
+.tagline {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* === Sprite + Menu === */
+/* mixin avec 4 paramètres */
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.nav__link {
+  color: hsl(0, 0%, 98%);
+  text-decoration: none;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav__link:hover, .nav__link:focus {
+  text-decoration: underline;
+}
+
+/* ✅ mixin appelé correctement (0, 0, $icon, $icon) */
+.ico {
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+}
+
+/* positions provisoires (ajuster après sprite) */
+.ico--1 {
+  background-position: 0 0;
+}
+
+.ico--2 {
+  background-position: -1.5rem 0;
+}
+
+.ico--3 {
+  background-position: -3rem 0;
+}
+
+.ico--4 {
+  background-position: -4.5rem 0;
+}
+
+.ico--5 {
+  background-position: -6rem 0;
 }
