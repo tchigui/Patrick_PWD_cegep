@@ -228,3 +228,41 @@ body {
 .poster--m12 {
   background-position: -21rem -49.5rem;
 }
+
+.ico {
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+}
+
+.poster {
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 10rem;
+  height: 15rem;
+  display: inline-block;
+}
+
+.ico--1 {
+  background-position: 0 0;
+}
+
+.ico--2 {
+  background-position: -2rem 0;
+}
+
+.ico--3 {
+  background-position: -4rem 0;
+}
+
+.ico--4 {
+  background-position: -6rem 0;
+}
+
+.ico--5 {
+  background-position: -8rem 0;
+}
