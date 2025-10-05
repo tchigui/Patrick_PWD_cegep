@@ -7,9 +7,9 @@ $font-base: clamp(0.95rem, 0.4vw + 0.9rem, 1.125rem);
 $font-title: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
 
 /* Palette accessible & harmonisée */
-$text: hsl(220 20% 18%);      /* plus sombre -> meilleur contraste */
-$text-dark: hsl(0 0% 99%);    /* texte sur fonds foncés */
-$brand: hsl(48 100% 52%);     /* accent lisible */
+$text: hsl(220 20% 18%);
+$text-dark: hsl(0 0% 99%);
+$brand: hsl(48 100% 52%);
 
 $bg-header: hsl(280 65% 18%);
 $bg-sidebar: hsl(220 45% 16%);
@@ -26,6 +26,7 @@ html { font-size: 100%; }
 body {
   margin: 0;
   color: $text;
+  background: $bg-main;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
   font-size: $font-base;
 }
@@ -33,22 +34,25 @@ a { color: $link; }
 a:hover, a:focus { color: $link-hover; }
 .sr-only { position: absolute; width: 1ch; height: 1ch; margin: -1ch; clip: rect(0 0 0 0); overflow: hidden; }
 
-/* === Grille === */
-.layout {
+/* === Containers centrés === */
+.container{ max-width: $maxw; margin-inline: auto; padding-inline: 1rem; }
+.header__inner{ display: grid; row-gap: .25rem; align-content: center; min-height: 5.5rem; }
+
+/* === Grille full width (Option B) === */
+.layout{
   display: grid;
-  grid-template-columns: 18rem 1fr;
+  grid-template-columns: 20rem minmax(0, 1fr); /* sidebar un peu plus large */
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header"
     "sidebar content"
     "footer footer";
   min-height: 100vh;
-  max-width: $maxw;
-  margin-inline: auto;
+  max-width: none; width: 100%; margin-inline: 0;
 }
-.header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: calc($space*1.25) $space; }
+.header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: calc($space*1.25) 0; }
 .sidebar { grid-area: sidebar; background: $bg-sidebar; color: $text-dark; padding: calc($space*1.25); }
-.content { grid-area: content; background: $bg-main;   padding: calc($space*1.25); }
+.content { grid-area: content; background: $bg-main;   padding: calc($space*1.25) 0; }
 .footer  { grid-area: footer;  background: $bg-footer;  color: $text; padding: $space; text-align: center; }
 
 /* Bandeau */
@@ -64,29 +68,21 @@ a:hover, a:focus { color: $link-hover; }
 }
 
 /* === Menu + icônes (sprite) === */
-$icon: 2rem;  /* 32px, correspond à la spritesheet */
+$icon: 2rem;
 
 /* Liste du menu */
 .nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc($space*.75); }
 
 /* Lien du menu : icône + texte alignés sur 1 ligne */
 .nav__link{
-  color: $text-dark;
-  text-decoration: none;
-  display: grid;
-  grid-template-columns: $icon auto; /* col 1 = icône, col 2 = texte */
-  align-items: center;
-  column-gap: .75rem;
-  white-space: nowrap;     /* évite le retour à la ligne du texte */
-  overflow: hidden;
-  text-overflow: ellipsis; /* "…" si ça dépasse */
+  color: $text-dark; text-decoration: none;
+  display: grid; grid-template-columns: $icon auto; align-items: center;
+  column-gap: .75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .nav__link:hover, .nav__link:focus { text-decoration: underline; }
 
-/* Appel mixin CORRECT (4 args) */
+/* Icônes (sprite) */
 .ico { @include sprite(0, 0, $icon, $icon); }
-
-/* Positions EXACTES des 5 icônes (spritesheet fournie) */
 .ico--1 { background-position:   0     0; }
 .ico--2 { background-position:  -2rem  0; }
 .ico--3 { background-position:  -4rem  0; }
@@ -97,9 +93,10 @@ $icon: 2rem;  /* 32px, correspond à la spritesheet */
 $poster-w: 10rem;  /* 160px */
 $poster-h: 15rem;  /* 240px */
 
-.tiles { display: flex; flex-wrap: wrap; gap: $space; }
+.tiles { display: flex; flex-wrap: wrap; gap: $space; justify-content: flex-start; }
 .tile  {
-  background: #fff; border-radius: $radius; padding: $space; width: max-content;
+  background: #fff; border-radius: $radius; padding: $space;
+  inline-size: calc($poster-w + 2 * $space);  /* largeur fixe -> plusieurs colonnes */
   display: inline-grid; justify-items: center; text-align: center; text-decoration: none; color: inherit;
   box-shadow: 0 0.25rem 1rem hsl(220 30% 10% / .08); transition: transform .2s ease;
 }
@@ -108,47 +105,34 @@ $poster-h: 15rem;  /* 240px */
 .tile__link  { font-size: .9em; color: $link; text-decoration: underline; }
 .tile__link:hover { color: $link-hover; }
 
-/* Appel mixin CORRECT (4 args) */
+/* Affiches (sprite) */
 .poster { @include sprite(0, 0, $poster-w, $poster-h); border-radius: calc($radius - .25rem); background-color: hsl(220 10% 95%); }
 
-/* Positions EXACTES des 12 affiches (spritesheet fournie) */
-/* Colonnes: x = 0 / -10rem / -20rem ; Lignes sous icônes: y = -2rem / -17rem / -32rem / -47rem */
+/* Positions EXACTES des 12 affiches */
 .poster--m1  { background-position:   0     -2rem; }
 .poster--m2  { background-position: -10rem -2rem; }
 .poster--m3  { background-position: -20rem -2rem; }
-
 .poster--m4  { background-position:   0     -17rem; }
 .poster--m5  { background-position: -10rem -17rem; }
 .poster--m6  { background-position: -20rem -17rem; }
-
 .poster--m7  { background-position:   0     -32rem; }
 .poster--m8  { background-position: -10rem -32rem; }
 .poster--m9  { background-position: -20rem -32rem; }
-
 .poster--m10 { background-position:   0     -47rem; }
 .poster--m11 { background-position: -10rem -47rem; }
 .poster--m12 { background-position: -20rem -47rem; }
 
-/* === Accessibilité: focus visible (unique, sans doublon) === */
-.nav__link:focus-visible,
-.tile:focus-visible {
-  outline: .2rem solid $focus;
-  outline-offset: .2rem;
-}
+/* Focus visible */
+.nav__link:focus-visible, .tile:focus-visible { outline: .2rem solid $focus; outline-offset: .2rem; }
 
-/* === Skip-link (accessibilité) === */
-.skip-link{
-  position:absolute; left:-100vw; top:0;
-  padding:.75rem 1rem; background:$brand; color:black; text-decoration:none; border-radius:.5rem;
-}
+/* Skip-link */
+.skip-link{ position:absolute; left:-100vw; top:0; padding:.75rem 1rem; background:$brand; color:black; text-decoration:none; border-radius:.5rem; }
 .skip-link:focus-visible{ left:1rem; top:1rem; }
 
-/* === Responsive mobile (≤ 50rem ~ 800px) === */
-$poster-w-sm: 7.5rem;
-$poster-h-sm: 11.25rem;
+/* === Responsive (≤ 50rem) === */
+$poster-w-sm: 7.5rem; $poster-h-sm: 11.25rem;
 
 @media (max-width: 50rem){
-  /* Layout 1 colonne + menu caché */
   .layout{
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -157,11 +141,7 @@ $poster-h-sm: 11.25rem;
       "footer";
   }
   .sidebar{ display: none; }
-
-  /* Tuiles centrées et posters plus petits */
   .tiles{ justify-content: center; }
   .poster{ width: $poster-w-sm; height: $poster-h-sm; }
-
-  /* Étape 16: cacher le titre et le lien */
   .tile__title, .tile__link{ display: none; }
 }
