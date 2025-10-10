@@ -1,15 +1,5 @@
 @charset "UTF-8";
-/* ================================
-   Variables (unités relatives)
-================================== */
-/* Palette accessible & harmonisée */
-/* Sprite sizes (doivent matcher la spritesheet fournie) */
-/* 32px */
-/* 160px */
-/* 240px */
-/* ================================
-   Reset + base
-================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -43,7 +33,9 @@ a:hover, a:focus {
   overflow: hidden;
 }
 
-/* Containers */
+/* ================================
+   Containers
+================================== */
 .container {
   max-width: 90rem;
   margin-inline: auto;
@@ -99,7 +91,9 @@ a:hover, a:focus {
   text-align: center;
 }
 
-/* Bandeau */
+/* ================================
+   Bandeau
+================================== */
 .brand {
   margin: 0 0 1rem 0;
   font-size: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
@@ -142,7 +136,9 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* Icônes (sprite) */
+/* ================================
+   Icônes (sprite)
+================================== */
 .ico {
   background-image: url("../img/spritesheet.png");
   background-repeat: no-repeat;
@@ -186,7 +182,7 @@ a:hover, a:focus {
   background: #fff;
   border-radius: 1.25rem;
   padding: 1rem;
-  inline-size: 12rem; /* largeur fixe -> multi-colonnes */
+  inline-size: 12rem;
   display: inline-grid;
   justify-items: center;
   align-content: start;
@@ -219,7 +215,9 @@ a:hover, a:focus {
   color: hsl(220, 75%, 30%);
 }
 
-/* Affiche (sprite) */
+/* ================================
+   Affiche (sprite)
+================================== */
 .poster {
   background-image: url("../img/spritesheet.png");
   background-repeat: no-repeat;
@@ -231,7 +229,9 @@ a:hover, a:focus {
   background-color: hsl(220, 10%, 95%);
 }
 
-/* Positions EXACTES des 12 affiches */
+/* ================================
+   Positions EXACTES des 12 affiches
+================================== */
 .poster--m1 {
   background-position: 0 -2rem;
 }

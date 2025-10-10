@@ -1,6 +1,5 @@
-/* ================================
-   Variables (unités relatives)
-================================== */
+
+/* ---------- Variables (unités relatives) ---------- */
 $space: 1rem;
 $radius: 1.25rem;
 $maxw: 90rem;
@@ -8,7 +7,6 @@ $maxw: 90rem;
 $font-base: clamp(0.95rem, 0.4vw + 0.9rem, 1.125rem);
 $font-title: clamp(1.6rem, 1.6vw + 1rem, 2.6rem);
 
-/* Palette accessible & harmonisée */
 $text: hsl(220 20% 18%);
 $text-dark: hsl(0 0% 99%);
 $brand: hsl(48 100% 52%);
@@ -22,16 +20,28 @@ $link: hsl(220 70% 35%);
 $link-hover: hsl(220 75% 30%);
 $focus: hsl(220 90% 45%);
 
-/* Sprite sizes (doivent matcher la spritesheet fournie) */
-$icon: 2rem;        /* 32px */
-$poster-w: 10rem;   /* 160px */
-$poster-h: 15rem;   /* 240px */
+/* ---------- Sprite (URLs & dimensions réelles) ---------- */
+/* Desktop : 480×992px => 30rem × 62rem (si 1rem=16px) */
+$sprite-d-url: '../img/spritesheet-desktop.png';
+$sprite-d-w: 30rem;
+$sprite-d-h: 62rem;
+
+/* Mobile : 360×744px => 22.5rem × 46.5rem (75% du desktop) */
+$sprite-m-url: '../img/spritesheet-mobile.png';
+$sprite-m-w: 22.5rem;
+$sprite-m-h: 46.5rem;
+
+/* Tailles unitaires (doivent matcher la grille du sprite) */
+$icon: 2rem;               /* desktop */
+$poster-w: 10rem;
+$poster-h: 15rem;
+
+/* Mobile (75%) */
+$icon-sm: 1.5rem;
 $poster-w-sm: 7.5rem;
 $poster-h-sm: 11.25rem;
 
-/* ================================
-   Reset + base
-================================== */
+/* ---------- Reset + base ---------- */
 * { box-sizing: border-box; }
 html { font-size: 100%; }
 body {
@@ -44,14 +54,9 @@ body {
 a { color: $link; }
 a:hover, a:focus { color: $link-hover; }
 .sr-only { position: absolute; width: 1ch; height: 1ch; margin: -1ch; clip: rect(0 0 0 0); overflow: hidden; }
-
-/* Containers */
 .container{ max-width: $maxw; margin-inline: auto; padding-inline: 1rem; }
-.header__inner{ display: grid; row-gap: .25rem; align-content: center; min-height: 5.5rem; }
 
-/* ================================
-   Grille full-width (Option B)
-================================== */
+/* ---------- Grille full-width (4 zones) ---------- */
 .layout{
   display: grid;
   grid-template-columns: 20rem minmax(0, 1fr);
@@ -61,7 +66,6 @@ a:hover, a:focus { color: $link-hover; }
     "sidebar content"
     "footer footer";
   min-height: 100vh;
-  max-width: none; width: 100%; margin-inline: 0;
 }
 .header  { grid-area: header;  background: $bg-header;  color: $text-dark; padding: calc($space*1.25) 0; }
 .sidebar { grid-area: sidebar; background: $bg-sidebar; color: $text-dark; padding: calc($space*1.25); }
@@ -69,24 +73,27 @@ a:hover, a:focus { color: $link-hover; }
 .footer  { grid-area: footer;  background: $bg-footer;  color: $text; padding: $space; text-align: center; }
 
 /* Bandeau */
+.header__inner{ display: grid; row-gap: .25rem; align-content: center; min-height: 5.5rem; }
 .brand  { margin: 0 0 $space 0; font-size: $font-title; line-height: 1.1; color: $brand; }
 .tagline{ margin: 0; opacity: .9; }
 
-/* ================================
-   Sprite: mixin utilitaire
-================================== */
+/* ---------- Mixin sprite ---------- */
 @mixin sprite($x, $y, $w, $h){
-  background-image: url('../img/spritesheet.png');
-  background-repeat: no-repeat;
   background-position: $x $y;
+  background-repeat: no-repeat;
   width: $w; height: $h; display: inline-block;
 }
 
-/* ================================
-   Menu (icône + texte)
-================================== */
-.nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc($space*.9); }
+/* ---------- Icônes + Posters : image & taille par défaut (desktop) ---------- */
+.ico, .poster{
+  background-image: url(#{$sprite-d-url});
+  background-size: $sprite-d-w $sprite-d-h;
+}
+.ico    { @include sprite(0, 0, $icon, $icon); }
+.poster { @include sprite(0, 0, $poster-w, $poster-h); border-radius: calc($radius - .25rem); background-color: hsl(220 10% 95%); }
 
+/* ---------- Menu gauche (icône + texte sur une ligne) ---------- */
+.nav__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc($space*.9); }
 .nav__link{
   color: $text-dark; text-decoration: none;
   display: grid; grid-template-columns: $icon auto; align-items: center;
@@ -94,24 +101,20 @@ a:hover, a:focus { color: $link-hover; }
 }
 .nav__link:hover, .nav__link:focus { text-decoration: underline; }
 
-/* Icônes (sprite) */
-.ico { @include sprite(0, 0, $icon, $icon); }
 .ico--1 { background-position:   0     0; }
 .ico--2 { background-position:  -2rem  0; }
 .ico--3 { background-position:  -4rem  0; }
 .ico--4 { background-position:  -6rem  0; }
 .ico--5 { background-position:  -8rem  0; }
 
-/* ================================
-   Tuiles + Affiches (sprite)
-================================== */
+/* ---------- Tuiles (Flexbox) ---------- */
 .tiles{
   display: flex; flex-wrap: wrap; gap: 1.25rem;
   justify-content: flex-start;
 }
 .tile{
   background: #fff; border-radius: $radius; padding: $space;
-  inline-size: calc($poster-w + 2 * $space); /* largeur fixe -> multi-colonnes */
+  inline-size: calc($poster-w + 2 * $space);
   display: inline-grid; justify-items: center; align-content: start;
   text-align: center; text-decoration: none; color: inherit;
   box-shadow: 0 0.25rem 1rem hsl(220 30% 10% / .08);
@@ -123,13 +126,10 @@ a:hover, a:focus { color: $link-hover; }
 .tile__link { font-size: .9em; color: $link; text-decoration: underline; }
 .tile__link:hover { color: $link-hover; }
 
-/* Affiche (sprite) */
-.poster{ @include sprite(0, 0, $poster-w, $poster-h); border-radius: calc($radius - .25rem); background-color: hsl(220 10% 95%); }
-
-/* Positions EXACTES des 12 affiches */
+/* ---------- Posters : positions exactes (3 colonnes × 4 rangées) ---------- */
 .poster--m1  { background-position:   0     -2rem; }
-.poster--m2  { background-position: -10rem -2rem; }
-.poster--m3  { background-position: -20rem -2rem; }
+.poster--m2  { background-position: -10rem  -2rem; }
+.poster--m3  { background-position: -20rem  -2rem; }
 .poster--m4  { background-position:   0     -17rem; }
 .poster--m5  { background-position: -10rem -17rem; }
 .poster--m6  { background-position: -20rem -17rem; }
@@ -140,21 +140,15 @@ a:hover, a:focus { color: $link-hover; }
 .poster--m11 { background-position: -10rem -47rem; }
 .poster--m12 { background-position: -20rem -47rem; }
 
-/* ================================
-   Accessibilité
-================================== */
-.nav__link:focus-visible,
-.tile:focus-visible{ outline: .2rem solid $focus; outline-offset: .2rem; }
-
+/* ---------- Accessibilité ---------- */
+.nav__link:focus-visible, .tile:focus-visible{ outline: .2rem solid $focus; outline-offset: .2rem; }
 .skip-link{
   position:absolute; left:-100vw; top:0;
   padding:.75rem 1rem; background:$brand; color:black; text-decoration:none; border-radius:.5rem;
 }
 .skip-link:focus-visible{ left:1rem; top:1rem; }
 
-/* ================================
-   Responsive (≤ 50rem)
-================================== */
+/* ---------- Responsive (≤ 50rem) ---------- */
 @media (max-width: 50rem){
   .layout{
     grid-template-columns: 1fr;
@@ -164,8 +158,16 @@ a:hover, a:focus { color: $link-hover; }
       "footer";
   }
   .sidebar{ display: none; }
+
   .content > .container { padding-block: 1rem; }
   .tiles{ justify-content: center; gap: 1rem; }
-  .poster{ width: $poster-w-sm; height: $poster-h-sm; }
+
+  .ico, .poster{
+    background-image: url(#{$sprite-m-url});
+    background-size: $sprite-m-w $sprite-m-h;
+  }
+  .ico    { width: $icon-sm;     height: $icon-sm;     }
+  .poster { width: $poster-w-sm; height: $poster-h-sm; }
+
   .tile__title, .tile__link{ display: none; }
 }
