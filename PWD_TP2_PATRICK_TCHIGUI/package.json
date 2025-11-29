@@ -9,5 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  }
 }
