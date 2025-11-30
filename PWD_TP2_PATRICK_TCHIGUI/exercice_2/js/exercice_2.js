@@ -20,5 +20,6 @@ function chargerDefinitionForces () {
     .catch(function (erreur) {
       console.error('Erreur lors du chargement de la définition des forces :', erreur)
       divDefinition.textContent = 'Impossible de charger la définition des forces.'
+      
     })
 }
