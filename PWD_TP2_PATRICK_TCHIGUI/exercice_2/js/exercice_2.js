@@ -15,10 +15,23 @@ function chargerDefinitionForces () {
       if (!response.ok) {
         throw new Error('Réponse HTTP invalide : ' + response.status)
       }
-      return response.text()
+      return response.json()
     })
-    .then(function (html) {
-      divDefinition.innerHTML = html
+    .then(function (donnees) {
+      console.log('Définition des forces reçue :', donnees)
+
+      const liste = donnees.definition_forces
+      const ul = document.createElement('ul')
+      ul.className = 'mb-0'
+
+      liste.forEach(function (item) {
+        const li = document.createElement('li')
+        li.innerHTML = '<strong>' + item.force + ' : </strong>' + item.definition
+        ul.appendChild(li)
+      })
+
+      divDefinition.innerHTML = ''
+      divDefinition.appendChild(ul)
     })
     .catch(function (erreur) {
       console.error('Erreur lors du chargement de la définition des forces :', erreur)
@@ -38,8 +51,18 @@ function chargerCoefficients () {
     })
     .then(function (donnees) {
       console.log('Coefficients CDp/K reçus :', donnees)
-      // on copie les propriétés dans l'objet existant (coefficients est const)
-      Object.assign(coefficients, donnees)
+
+      // on suppose { data_cdp_k: { "0": {...}, "20": {...}, "45": {...} } }
+      const map = donnees.data_cdp_k
+
+      Object.keys(map).forEach(function (cle) {
+        coefficients[cle] = {
+          CDp: parseFloat(map[cle].CDp),
+          K: parseFloat(map[cle].K)
+        }
+      })
+
+      console.log('Coefficients finalisés :', coefficients)
     })
     .catch(function (erreur) {
       console.error('Erreur lors du chargement des coefficients CDp/K :', erreur)
@@ -68,10 +91,14 @@ function initialiserFormulaire () {
       return
     }
 
-    const resultatCD = calculerCD(flap, M, Cl)
-    const texte = 'CD = ' + resultatCD.toFixed(4)
-
-    afficherMessage(zoneMessage, texte, 'success')
+    try {
+      const resultatCD = calculerCD(flap, M, Cl)
+      const texte = 'CD = ' + resultatCD.toFixed(4)
+      afficherMessage(zoneMessage, texte, 'success')
+    } catch (erreur) {
+      console.error(erreur)
+      afficherMessage(zoneMessage, erreur.message, 'danger')
+    }
   })
 }
 
@@ -88,18 +115,23 @@ function validerSaisie (flap, M, Cl) {
     return 'Le coefficient de portance (Cl) doit être entre 0,2 et 1,2.'
   }
 
+  const flapKey = String(flap)
+  if (!(flapKey in coefficients)) {
+    return "Les coefficients n'ont pas encore été chargés pour ce Flap. Réessaie dans un instant."
+  }
+
   return ''
 }
 
 function calculerCD (flap, M, Cl) {
-  const infosFlap = coefficients[flap]
+  const infosFlap = coefficients[String(flap)]
 
   if (!infosFlap) {
     throw new Error('Aucun coefficient trouvé pour Flap = ' + flap)
   }
 
-  const CDp = parseFloat(infosFlap.CDp)
-  const K = parseFloat(infosFlap.K)
+  const CDp = infosFlap.CDp
+  const K = infosFlap.K
   const Cl2 = Cl * Cl
 
   let CDcomp = 0
