@@ -66,5 +66,4 @@ function creerCellule (valeur) {
   }
 
   return td
-  
 }
