@@ -1,3 +1,5 @@
+/* global _ */
+
 window.addEventListener('load', function () {
   const URL_PARAMS = 'http://localhost:8080/params_grille_nombres.php'
 
@@ -9,18 +11,19 @@ window.addEventListener('load', function () {
       return response.json()
     })
     .then(function (params) {
-      genererGrille(params)
+      console.log('Paramètres reçus pour la grille :', params)
+      genererGrille()
     })
     .catch(function (erreur) {
       console.error('Erreur lors du chargement des paramètres :', erreur)
     })
 })
 
-function genererGrille (params) {
+function genererGrille () {
   const conteneurTableau = document.getElementById('conteneurTableau')
   const infoSuperieur80 = document.getElementById('infoSuperieur80')
 
-  const nbLignes = 20 // tu peux plus tard utiliser params.lignes, params.colonnes, etc.
+  const nbLignes = 20
   const nbColonnes = 15
 
   let compteurSuperieur80 = 0
@@ -32,7 +35,7 @@ function genererGrille (params) {
     const tr = document.createElement('tr')
 
     for (let col = 0; col < nbColonnes; col++) {
-      const valeur = Math.floor(Math.random() * (90 - 10 + 1)) + 10
+      const valeur = _.random(10, 90)
       const td = creerCellule(valeur)
 
       if (valeur > 80) {
