@@ -23,7 +23,9 @@ window.addEventListener('load', function () {
 
         for (let col = 0; col < nbColonnes; col++) {
           const td = document.createElement('td')
-          td.textContent = '0' // valeur provisoire
+               const valeur = _.random(10, 90)
+
+          td.textContent = valeur // valeur provisoire
           tr.appendChild(td)
         }
 
