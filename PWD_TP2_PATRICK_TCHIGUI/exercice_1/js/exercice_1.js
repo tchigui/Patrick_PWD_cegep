@@ -32,7 +32,7 @@ function genererGrille (params) {
     const tr = document.createElement('tr')
 
     for (let col = 0; col < nbColonnes; col++) {
-      const valeur = _.random(10, 90)
+      const valeur = Math.floor(Math.random() * (90 - 10 + 1)) + 10
       const td = creerCellule(valeur)
 
       if (valeur > 80) {
