@@ -143,7 +143,6 @@ function calculerCD (flap, M, Cl) {
   } else if (M > 0.78 && M <= 0.85) {
     CDcomp = (-99.3434 + 380.888 * M - 486.8 * M * M + 207.408 * M * M * M) * Cl2
   }
-
   const CD = CDp + K * Cl2 + CDcomp
   return CD
 }
