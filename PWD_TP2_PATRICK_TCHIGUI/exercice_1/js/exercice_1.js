@@ -17,6 +17,9 @@ window.addEventListener('load', function () {
 
       const table = document.createElement('table')
       const tbody = document.createElement('tbody')
+      const infoSuperieur80 = document.getElementById('infoSuperieur80')
+
+            let compteurSuperieur80 = 0
 
       for (let ligne = 0; ligne < nbLignes; ligne++) {
         const tr = document.createElement('tr')
@@ -25,7 +28,13 @@ window.addEventListener('load', function () {
           const td = document.createElement('td')
                const valeur = _.random(10, 90)
 
-          td.textContent = valeur // valeur provisoire
+          td.textContent = valeur 
+          
+          if (valeur > 80) {
+            td.style.backgroundColor = 'rgb(5, 173, 131)'
+             td.style.color = 'rgb(255, 255, 255)'
+                compteurSuperieur80++
+            }
           tr.appendChild(td)
         }
 
@@ -35,8 +44,14 @@ window.addEventListener('load', function () {
       table.appendChild(tbody)
       conteneurTableau.innerHTML = ''
       conteneurTableau.appendChild(table)
+
+      infoSuperieur80.textContent =
+         'Nombre de cellules ayant un nombre supérieur à 80 : ' + compteurSuperieur80
+
     })
     .catch(function (erreur) {
       console.error('Erreur lors du chargement des paramètres :', erreur)
     })
+
+
 })
