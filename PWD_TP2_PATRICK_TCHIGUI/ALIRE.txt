@@ -1,1 +1,153 @@
-PATRICK TCHIGUI
+TP2 – Programmation Web Dynamique (420-V88-LP)
+Travail pratique #2 – Javascript & HTML
+Session : Automne 2025
+Enseignant : Nicola Demers
+
+Étudiant : Patrick Tchigui
+
+
+
+1) Structure générale du projet
+
+Le projet est organisé selon l’arborescence demandée dans l’énoncé.
+Les deux exercices se trouvent dans les dossiers :
+
+- exercice_1/
+  - index.html
+  - css/style.css
+  - js/exercice_1.js
+
+- exercice_2/
+  - index.html
+  - css/style.css (optionnel ou vide)
+  - js/exercice_2.js
+
+Les fichiers PHP et la configuration Docker (docker-compose.yml, Dockerfile, etc.)
+se trouvent à la racine du projet, tel que demandé dans l’énoncé.
+
+
+2) Comment démarrer le projet (Docker + PHP)
+
+Préconditions :
+- Docker Desktop installé et en marche
+- Navigation avec Firefox Developer Edition (tel que demandé)
+
+Étapes pour démarrer le serveur Apache/PHP avec Docker :
+
+1. Ouvrir un terminal (PowerShell) dans le répertoire racine du projet.
+2. Lancer la commande :
+
+   docker compose up -d --build
+
+3. Les services PHP seront alors accessibles via :
+   - http://localhost:8080/params_grille_nombres.php
+   - http://localhost:8080/data_cdp_k.php
+   - http://localhost:8080/definition_forces.php
+
+4. Laisser Docker en marche pendant les tests des deux exercices.
+
+
+3) Exercice 1 – Grille de nombres (exercice_1/index.html)
+
+Fonctionnement :
+
+- La page exercice_1/index.html charge les paramètres depuis :
+  http://localhost:8080/params_grille_nombres.php
+
+- Un tableau HTML de 20 lignes x 15 colonnes est généré dynamiquement
+  en Javascript (DOM).
+
+- Chaque cellule contient un nombre entier aléatoire entre 10 et 90
+  généré avec la librairie Lodash (méthode _.random()).
+
+- Les cellules dont la valeur est > 80 sont mises en évidence :
+  - fond : rgb(5, 173, 131)
+  - texte : rgb(255, 255, 255)
+
+- Sous le tableau, un paragraphe affiche :
+  « Nombre de cellules ayant un nombre supérieur à 80 : X »
+
+- Un petit fichier CSS (exercice_1/css/style.css) est utilisé pour
+  améliorer légèrement la présentation (marges, police, tableau).
+
+
+4) Exercice 2 – Calculateur de coefficient de traînée (exercice_2/index.html)
+
+Fonctionnement :
+
+- La page exercice_2/index.html utilise Bootstrap (CSS + JS)
+  via les fichiers installés avec npm dans node_modules.
+
+- Un formulaire permet de saisir :
+  - Flap (0, 20 ou 45)
+  - M (nombre de Mach entre 0 et 0.85)
+  - Cl (coefficient de portance entre 0.2 et 1.2)
+
+- Avant le calcul, les valeurs sont validées en Javascript :
+  - Flap doit être 0, 20 ou 45
+  - M doit être dans [0, 0.85]
+  - Cl doit être dans [0.2, 1.2]
+  En cas d’erreur, un message d’erreur est affiché avec un « alert »
+  Bootstrap.
+
+- La zone « Définition des forces » est remplie dynamiquement à partir de :
+  http://localhost:8080/definition_forces.php
+  Les données JSON sont transformées en liste HTML.
+
+- Les coefficients CDp et K sont récupérés grâce à :
+  http://localhost:8080/data_cdp_k.php
+
+  Le script Javascript reconstruit une structure interne permettant
+  d’obtenir CDp et K pour Flap = 0, 20 ou 45.
+
+- Le calcul du coefficient de traînée CD est fait dans la fonction
+  calculerCD(flap, M, Cl) en respectant l’équation de l’énoncé :
+
+  CD = CDp + K * Cl² + CDcomp
+
+  avec CDcomp calculé selon les trois cas définis pour M.
+
+- Le résultat est affiché sous le formulaire dans un « alert » Bootstrap
+  (CD = … avec 4 décimales).
+
+
+5) StandardJS et qualité du code
+
+- Les fichiers Javascript suivants ont été validés avec StandardJS :
+
+  - exercice_1/js/exercice_1.js
+  - exercice_2/js/exercice_2.js
+
+- La commande utilisée pour la validation :
+
+  npx standard exercice_1/js/exercice_1.js exercice_2/js/exercice_2.js
+
+- Les principaux points respectés :
+  - indentation à 2 espaces
+  - absence de points-virgules inutiles
+  - noms de fonctions et variables significatifs
+  - gestion des erreurs avec try/catch ou messages clairs en console
+
+
+6) Git et gestion des versions
+
+- Le projet a été développé avec Git.
+- Plusieurs commits ont été effectués tout au long du développement
+  (structure du projet, intégration de Lodash, configuration Bootstrap,
+  validation StandardJS, débogage des calculs, etc.).
+- Le dépôt GitHub associé contient l’historique complet des modifications.
+
+
+7) Particularités et remarques
+
+- Pour tester correctement les deux exercices, il est important que Docker
+  soit en marche et que les URL suivantes répondent :
+  - http://localhost:8080/params_grille_nombres.php
+  - http://localhost:8080/data_cdp_k.php
+  - http://localhost:8080/definition_forces.php
+
+- Avant la remise finale, le répertoire node_modules sera supprimé du projet
+  conformément à l’énoncé (le correcteur pourra réinstaller les dépendances
+  avec npm au besoin).
+
+- Les pages ont été testées sous Firefox Developer Edition comme demandé.
