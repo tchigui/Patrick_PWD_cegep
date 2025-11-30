@@ -1,4 +1,5 @@
-let coefficients = {}
+const coefficients = {}
+
 window.addEventListener('load', function () {
   chargerDefinitionForces()
   chargerCoefficients()
@@ -22,11 +23,29 @@ function chargerDefinitionForces () {
     .catch(function (erreur) {
       console.error('Erreur lors du chargement de la définition des forces :', erreur)
       divDefinition.textContent = 'Impossible de charger la définition des forces.'
-
     })
-
-    
 }
+
+function chargerCoefficients () {
+  const URL_COEFFS = 'http://localhost:8080/data_cdp_k.php'
+
+  fetch(URL_COEFFS)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error('Réponse HTTP invalide : ' + response.status)
+      }
+      return response.json()
+    })
+    .then(function (donnees) {
+      console.log('Coefficients CDp/K reçus :', donnees)
+      // on copie les propriétés dans l'objet existant (coefficients est const)
+      Object.assign(coefficients, donnees)
+    })
+    .catch(function (erreur) {
+      console.error('Erreur lors du chargement des coefficients CDp/K :', erreur)
+    })
+}
+
 function initialiserFormulaire () {
   const form = document.getElementById('formCD')
   const selectFlap = document.getElementById('inputFlap')
@@ -41,7 +60,6 @@ function initialiserFormulaire () {
     const M = parseFloat(inputMach.value)
     const Cl = parseFloat(inputCl.value)
 
-    
     zoneMessage.innerHTML = ''
 
     const messageErreur = validerSaisie(flap, M, Cl)
@@ -51,8 +69,8 @@ function initialiserFormulaire () {
     }
 
     const resultatCD = calculerCD(flap, M, Cl)
-
     const texte = 'CD = ' + resultatCD.toFixed(4)
+
     afficherMessage(zoneMessage, texte, 'success')
   })
 }
@@ -82,7 +100,6 @@ function calculerCD (flap, M, Cl) {
 
   const CDp = parseFloat(infosFlap.CDp)
   const K = parseFloat(infosFlap.K)
-
   const Cl2 = Cl * Cl
 
   let CDcomp = 0
@@ -93,9 +110,6 @@ function calculerCD (flap, M, Cl) {
     CDcomp = (0.0508 - 0.1748 * M + 0.1504 * M * M) * Cl2
   } else if (M > 0.78 && M <= 0.85) {
     CDcomp = (-99.3434 + 380.888 * M - 486.8 * M * M + 207.408 * M * M * M) * Cl2
-  } else {
-    
-    CDcomp = 0
   }
 
   const CD = CDp + K * Cl2 + CDcomp
@@ -103,11 +117,8 @@ function calculerCD (flap, M, Cl) {
 }
 
 function afficherMessage (zone, texte, type) {
-  
   zone.innerHTML =
     '<div class="alert alert-' + type + '" role="alert">' +
       texte +
     '</div>'
 }
-
-
