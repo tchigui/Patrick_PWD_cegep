@@ -50,17 +50,22 @@ function chargerCoefficients () {
       return response.json()
     })
     .then(function (donnees) {
-      console.log('Coefficients CDp/K reçus :', donnees)
+      console.log('Données brutes CDp/K reçues :', donnees)
 
-      // on suppose { data_cdp_k: { "0": {...}, "20": {...}, "45": {...} } }
-      const map = donnees.data_cdp_k
+      // Structure exacte : { data_cdp_k: { cdp: [..], k: [..] } }
+      const data = donnees.data_cdp_k
+      const cdpArray = data.cdp
+      const kArray = data.k
 
-      Object.keys(map).forEach(function (cle) {
-        coefficients[cle] = {
-          CDp: parseFloat(map[cle].CDp),
-          K: parseFloat(map[cle].K)
+      const flapKeys = ['0', '20', '45']
+
+      for (let i = 0; i < flapKeys.length; i++) {
+        const flapKey = flapKeys[i]
+        coefficients[flapKey] = {
+          CDp: parseFloat(cdpArray[i]),
+          K: parseFloat(kArray[i])
         }
-      })
+      }
 
       console.log('Coefficients finalisés :', coefficients)
     })
@@ -115,11 +120,6 @@ function validerSaisie (flap, M, Cl) {
     return 'Le coefficient de portance (Cl) doit être entre 0,2 et 1,2.'
   }
 
-  const flapKey = String(flap)
-  if (!(flapKey in coefficients)) {
-    return "Les coefficients n'ont pas encore été chargés pour ce Flap. Réessaie dans un instant."
-  }
-
   return ''
 }
 
@@ -143,6 +143,7 @@ function calculerCD (flap, M, Cl) {
   } else if (M > 0.78 && M <= 0.85) {
     CDcomp = (-99.3434 + 380.888 * M - 486.8 * M * M + 207.408 * M * M * M) * Cl2
   }
+
   const CD = CDp + K * Cl2 + CDcomp
   return CD
 }
